@@ -13,14 +13,17 @@ public class User {
         this.userNumber = userNumber;
     }
 
+
     public List<Integer> userNumberSave() {
         userNumberList.add(userNumber / 100);
-        userNumber %= userNumber;
+        userNumber = userNumber % 100;
         userNumberList.add(userNumber / 10);
         userNumberList.add(userNumber % 10);
 
         return userNumberList;
     }
+
+
 
 }
 

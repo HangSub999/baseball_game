@@ -14,8 +14,10 @@ public class Referee {
 
     public static int ballCount(User user){
         int count = 0;
-        Computer.makeRandomNumber().retainAll(user.userNumberSave());
-        count = Computer.makeRandomNumber().size() - strikeCount(user);
-        return count;
+        for (int i = 0; i < 3; i++) {
+            if (Computer.makeRandomNumber().contains(user.userNumberSave().get(i)))
+                 count++;
+        }
+        return count - strikeCount(user);
     }
 }

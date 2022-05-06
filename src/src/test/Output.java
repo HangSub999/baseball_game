@@ -2,16 +2,16 @@ package test;
 
 public class Output {
 
-    public static void outputStrikeBall(int 스트라이크,int 볼){
-        System.out.println(스트라이크+" 스트라이크 "+볼+" 볼");
+    public static void outputStrikeBall(int strike,int ball){
+        System.out.println(strike+" 스트라이크 "+ball+" 볼");
    }
 
-   public static void outputStrike(int 스트라이크){
-       System.out.println(스트라이크+" 스트라이크 ");
+   public static void outputStrike(int strike){
+       System.out.println(strike+" 스트라이크 ");
    }
 
-   public static void outputBall(int 볼){
-       System.out.println(볼+" 볼");
+   public static void outputBall(int ball){
+       System.out.println(ball+" 볼");
    }
 
    public static void outputFourBall(){

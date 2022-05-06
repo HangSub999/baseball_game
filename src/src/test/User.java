@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    List<Integer> list = new ArrayList<>();
 
-    public List<Integer> 유저숫자(int 숫자) {
-        while (숫자 > 0) {
-            list.add(숫자 % 10);
-            숫자 = 숫자 / 10;
-        }
+    private int userNumber;
+    private final List<Integer> userNumberList;
+
+    public User(int userNumber) {
+        this.userNumberList = new ArrayList<>();
+        this.userNumber = userNumber;
+    }
+
+    public List<Integer> userNumberSave() {
+        userNumberList.add(userNumber / 100);
+        userNumber %= userNumber;
+        userNumberList.add(userNumber / 10);
+        userNumberList.add(userNumber % 10);
+
+        return userNumberList;
     }
 
 }

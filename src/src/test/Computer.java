@@ -6,17 +6,17 @@ import java.util.List;
 
 public class Computer {
 
-    private static final LinkedHashSet<Integer> randomNumberSet = new LinkedHashSet<>();
+    private static final LinkedHashSet<Integer> RANDOM_NUMBER_SET = new LinkedHashSet<>();
 
     public static List<Integer> makeRandomNumber() {
-        while (randomNumberSet.size() != 3) {
-            randomNumberSet.add((int) (Math.random() * 9) + 1);
+        while (RANDOM_NUMBER_SET.size() != 3) {
+            RANDOM_NUMBER_SET.add((int) (Math.random() * 9) + 1);
         }
-        return new ArrayList<>(randomNumberSet);
+        return new ArrayList<>(RANDOM_NUMBER_SET);
     }
 
     public static boolean randomNumberRest() {
-        randomNumberSet.clear();
+        RANDOM_NUMBER_SET.clear();
         return true;
     }
 

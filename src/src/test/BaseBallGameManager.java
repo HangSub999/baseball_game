@@ -27,10 +27,7 @@ public class BaseBallGameManager {
             } else {
                 Output.outputStrikeBall(Referee.strikeCount(user), Referee.ballCount(user));
             }
-
-
         }
-
     }
 
     public boolean isStopEndGo(int stopEndGo) {

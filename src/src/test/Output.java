@@ -18,7 +18,7 @@ public class Output {
        System.out.println("포볼");
    }
 
-   public static void outputClear(){
+   public static void outputCorrectAnswer(){
        System.out.println("3개의 숫자 모두 맞히셨습니다! 게임 종료");
    }
 

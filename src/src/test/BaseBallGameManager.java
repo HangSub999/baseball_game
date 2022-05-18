@@ -1,42 +1,57 @@
 package test;
 
+import java.util.List;
+
 public class BaseBallGameManager {
 
-    private boolean onOff;
+    private final static int STRIKE_NUMBER = 3;
+    private final static int STRIKE_ZERO = 0;
+    private final static int BALL_NUMBER = 3;
+    private final static int BALL_ZERO = 0;
 
-    public BaseBallGameManager() {
-        this.onOff = true;
-    }
+    public void startGame() {
+        List<Integer> computerNumberList = Computer.makeRandomNumber();
+        while (true) {
 
-    public void gameStart() {
-        while (onOff) {
-            Computer.makeRandomNumber();
-            System.out.println(Computer.makeRandomNumber());
+            System.out.println(computerNumberList);
             User user = new User(Input.inputUserNumber());
-
-            if (Referee.strikeCount(user) == 3) {
-                Output.outputStrike(Referee.strikeCount(user));
-                Output.outputClear();
-                isStopEndGo(Input.inputStopEndGoNumber());
-            } else if (Referee.ballCount(user) == 0 && Referee.strikeCount(user) == 0) {
-                Output.outputFourBall();
-            } else if (Referee.strikeCount(user) < 3 && Referee.ballCount(user) == 0) {
-                Output.outputStrike(Referee.strikeCount(user));
-            } else if (Referee.ballCount(user) <= 3 && Referee.strikeCount(user) == 0) {
-                Output.outputBall(Referee.ballCount(user));
+            if (isThreeStrike(user, computerNumberList)) {
+                Output.outputStrike(user.strikeCount(computerNumberList));
+                Output.outputCorrectAnswer();
+                if (!StopEndGoNumber(Input.inputStopEndGoNumber())) {
+                    System.out.println("ㅇㅇㅇㅇㅇㅇ");
+                    break;
+                } else {
+                    startGame();
+                }
+            } else if (isStrikeCount(user, computerNumberList)) {
+                Output.outputStrike(user.strikeCount(computerNumberList));
+            } else if (isBallCount(user, computerNumberList)) {
+                Output.outputBall(user.ballCount(computerNumberList));
             } else {
-                Output.outputStrikeBall(Referee.strikeCount(user), Referee.ballCount(user));
+                Output.outputStrikeBall(user.strikeCount(computerNumberList), user.ballCount(computerNumberList));
             }
         }
     }
 
-    public boolean isStopEndGo(int stopEndGo) {
-        if (stopEndGo == 2) {
-            return this.onOff = false;
-        } else {
-            Computer.randomNumberRest();
-            return this.onOff = true;
-        }
+    public boolean isThreeStrike(User user, List<Integer> computerNumberList) {
+        return user.strikeCount(computerNumberList) == STRIKE_NUMBER;
+    }
+
+    public boolean isFourBall(User user, List<Integer> computerNumberList) {
+        return user.ballCount(computerNumberList) == BALL_ZERO && user.strikeCount(computerNumberList) == STRIKE_ZERO;
+    }
+
+    public boolean isStrikeCount(User user, List<Integer> computerNumberList) {
+        return user.strikeCount(computerNumberList) < STRIKE_NUMBER && user.ballCount(computerNumberList) == BALL_ZERO;
+    }
+
+    public boolean isBallCount(User user, List<Integer> computerNumberList) {
+        return user.ballCount(computerNumberList) <= BALL_NUMBER && user.strikeCount(computerNumberList) == STRIKE_ZERO;
+    }
+
+    public boolean StopEndGoNumber(int number) {
+        return number == 1;
     }
 
 }

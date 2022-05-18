@@ -5,24 +5,46 @@ import java.util.List;
 
 public class User {
 
-    private int userNumber;
-    private final List<Integer> USER_NUMBER_LIST;
+    private final String userNumber;
 
-    public User(int userNumber) {
-        this.USER_NUMBER_LIST = new ArrayList<>();
+    public User(String userNumber) {
         this.userNumber = userNumber;
     }
 
-    public List<Integer> userNumberSave() {
-        USER_NUMBER_LIST.add(userNumber / 100);
-        userNumber = userNumber % 100;
-        USER_NUMBER_LIST.add(userNumber / 10);
-        USER_NUMBER_LIST.add(userNumber % 10);
+    private List<Integer> SaveUserNumber() {
+        List<Integer> list = new ArrayList<>();
 
-        return USER_NUMBER_LIST;
+        for (int i = 0; i < userNumber.length(); i++) {
+            list.add(Integer.valueOf(userNumber.substring(i, i + 1)));
+        }
+        return list;
     }
 
+    public int strikeCount(List<Integer> computerNumberList) {
+        int count = 0;
 
+        for (int i = 0; i < computerNumberList.size(); i++) {
+            if (computerNumberList.get(i).equals(SaveUserNumber().get(i))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int ballCount(List<Integer> computerNumberList) {
+        int count = 0;
+        int ball = 3;
+
+        for (int i = 0; i < ball; i++) {
+            if (computerNumberList.contains(SaveUserNumber().get(i)))
+                count++;
+        }
+        return count - strikeCount(computerNumberList);
+    }
 
 }
+
+
+
+
 

@@ -10,26 +10,23 @@ public class BaseBallGameManager {
     private final static int BALL_ZERO = 0;
 
     public void startGame() {
-        List<Integer> computerNumberList = Computer.makeRandomNumber();
+        List<Integer> computerNumbers = Computer.makeRandomNumber();
         while (true) {
-
-            System.out.println(computerNumberList);
+            System.out.println(computerNumbers);
             User user = new User(Input.inputUserNumber());
-            if (isThreeStrike(user, computerNumberList)) {
-                Output.outputStrike(user.strikeCount(computerNumberList));
+            if (isThreeStrike(user, computerNumbers)) {
+                Output.outputStrike(user.strikeCount(computerNumbers));
                 Output.outputCorrectAnswer();
-                if (!StopEndGoNumber(Input.inputStopEndGoNumber())) {
-                    System.out.println("ㅇㅇㅇㅇㅇㅇ");
-                    break;
-                } else {
+                if (StopEndGoNumber(Input.inputStopEndGoNumber())) {
                     startGame();
                 }
-            } else if (isStrikeCount(user, computerNumberList)) {
-                Output.outputStrike(user.strikeCount(computerNumberList));
-            } else if (isBallCount(user, computerNumberList)) {
-                Output.outputBall(user.ballCount(computerNumberList));
+                return;
+            } else if (isStrikeCount(user, computerNumbers)) {
+                Output.outputStrike(user.strikeCount(computerNumbers));
+            } else if (isBallCount(user, computerNumbers)) {
+                Output.outputBall(user.ballCount(computerNumbers));
             } else {
-                Output.outputStrikeBall(user.strikeCount(computerNumberList), user.ballCount(computerNumberList));
+                Output.outputStrikeBall(user.strikeCount(computerNumbers), user.ballCount(computerNumbers));
             }
         }
     }

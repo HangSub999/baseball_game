@@ -70,6 +70,8 @@ public class User {
         for (int i = DEFAULT; i < userNumber.length() - USER_NUMBER_SIZE_ONE; i++) {
             if (userNumber.charAt(i) == userNumber.charAt(i + USER_NUMBER_SIZE_ONE)) {
                 throw new IllegalArgumentException("중복된 값이 입력되었습니다.");
+            } else if (userNumber.charAt(i) == userNumber.charAt(i + 2) && i < userNumber.length() - USER_NUMBER_SIZE_ONE) {
+                throw new IllegalArgumentException("중복된 값이 입력되었습니다.");
             }
         }
     }

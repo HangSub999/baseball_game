@@ -17,7 +17,7 @@ public class BaseBallGameManager {
             User user = new User(Input.inputUserNumber());
 
             if (isThreeStrike(user, computerNumbers)) {
-                Output.printStrike(user.strikeCount(computerNumbers));
+                Output.printStrike(user.countStrike(computerNumbers));
                 Output.printCorrectAnswer();
                 if (StopEndGoNumber(Input.inputStopEndGoNumber())) {
                     startGame();
@@ -25,31 +25,31 @@ public class BaseBallGameManager {
                 return;
             } else if (isFourBall(user, computerNumbers)) {
                 Output.printFourBall();
-            } else if (isStrikeCount(user, computerNumbers)) {
-                Output.printStrike(user.strikeCount(computerNumbers));
-            } else if (isBallCount(user, computerNumbers)) {
-                Output.printBall(user.ballCount(computerNumbers));
+            } else if (isCountStrike(user, computerNumbers)) {
+                Output.printStrike(user.countStrike(computerNumbers));
+            } else if (isCountBall(user, computerNumbers)) {
+                Output.printBall(user.countBall(computerNumbers));
             } else {
-                Output.printStrikeBall(user.strikeCount(computerNumbers), user.ballCount(computerNumbers));
+                Output.printStrikeBall(user.countStrike(computerNumbers), user.countBall(computerNumbers));
             }
         }
 
     }
 
     public boolean isThreeStrike(User user, List<Integer> computerNumbers) {
-        return user.strikeCount(computerNumbers) == STRIKE_NUMBER;
+        return user.countStrike(computerNumbers) == STRIKE_NUMBER;
     }
 
     public boolean isFourBall(User user, List<Integer> computerNumbers) {
-        return user.ballCount(computerNumbers) == BALL_ZERO && user.strikeCount(computerNumbers) == STRIKE_ZERO;
+        return user.countBall(computerNumbers) == BALL_ZERO && user.countStrike(computerNumbers) == STRIKE_ZERO;
     }
 
-    public boolean isStrikeCount(User user, List<Integer> computerNumbers) {
-        return user.strikeCount(computerNumbers) < STRIKE_NUMBER && user.ballCount(computerNumbers) == BALL_ZERO;
+    public boolean isCountStrike(User user, List<Integer> computerNumbers) {
+        return user.countStrike(computerNumbers) < STRIKE_NUMBER && user.countBall(computerNumbers) == BALL_ZERO;
     }
 
-    public boolean isBallCount(User user, List<Integer> computerNumbers) {
-        return user.ballCount(computerNumbers) <= BALL_NUMBER && user.strikeCount(computerNumbers) == STRIKE_ZERO;
+    public boolean isCountBall(User user, List<Integer> computerNumbers) {
+        return user.countBall(computerNumbers) <= BALL_NUMBER && user.countStrike(computerNumbers) == STRIKE_ZERO;
     }
 
     public boolean StopEndGoNumber(int number) {

@@ -8,7 +8,7 @@ public class Input {
 
     public static String inputUserNumber(){
         System.out.print("숫자를 입력해 주세요 : ");
-        return SC.next();
+        return SC.nextLine();
     }
 
     public static int inputStopEndGoNumber(){

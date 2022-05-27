@@ -4,56 +4,68 @@ import java.util.List;
 
 public class BaseBallGameManager {
 
-    private final static int STRIKE_NUMBER = 3;
-    private final static int STRIKE_ZERO = 0;
-    private final static int BALL_NUMBER = 3;
-    private final static int BALL_ZERO = 0;
-
     public void startGame() {
+        List<Long> computerNumbers = Computer.makeRandomNumber();
 
-        while (true) {
-            List<Integer> computerNumbers = Computer.makeRandomNumber();
+        System.out.println(computerNumbers);
+        User user = new User(Input.inputUserNumber());
+
+        while (쓰리스트라이크시작종료(user, computerNumbers)) {
+            is포볼(user, computerNumbers);
+            is스트라이크(user, computerNumbers);
+            is볼(user, computerNumbers);
+            is스트라이크볼(user, computerNumbers);
             System.out.println(computerNumbers);
-            User user = new User(Input.inputUserNumber());
+            user = new User(Input.inputUserNumber());
+        }
+    }
 
-            if (isThreeStrike(user, computerNumbers)) {
-                Output.printStrike(user.countStrike(computerNumbers));
-                Output.printCorrectAnswer();
-                if (StopEndGoNumber(Input.inputStopEndGoNumber())) {
-                    startGame();
-                }
-                return;
-            } else if (isFourBall(user, computerNumbers)) {
-                Output.printFourBall();
-            } else if (isCountStrike(user, computerNumbers)) {
-                Output.printStrike(user.countStrike(computerNumbers));
-            } else if (isCountBall(user, computerNumbers)) {
-                Output.printBall(user.countBall(computerNumbers));
-            } else {
+    private void is스트라이크볼(User user, List<Long> computerNumbers) {
+        if (user.countStrike(computerNumbers) > 0 && user.countBall(computerNumbers) > 0) {
+            if (user.countStrike(computerNumbers) < 2 && user.countBall(computerNumbers) < 3) {
                 Output.printStrikeBall(user.countStrike(computerNumbers), user.countBall(computerNumbers));
             }
         }
-
     }
 
-    public boolean isThreeStrike(User user, List<Integer> computerNumbers) {
-        return user.countStrike(computerNumbers) == STRIKE_NUMBER;
+    private void is볼(User user, List<Long> computerNumbers) {
+        if (user.countBall(computerNumbers) > 0) {
+            if (user.countBall(computerNumbers) <= 3 && user.countStrike(computerNumbers) == 0) {
+                Output.printBall(user.countBall(computerNumbers));
+            }
+        }
     }
 
-    public boolean isFourBall(User user, List<Integer> computerNumbers) {
-        return user.countBall(computerNumbers) == BALL_ZERO && user.countStrike(computerNumbers) == STRIKE_ZERO;
+    private void is스트라이크(User user, List<Long> computerNumbers) {
+        if (user.countStrike(computerNumbers) > 0) {
+            if (user.countStrike(computerNumbers) < 3 && user.countBall(computerNumbers) == 0) {
+                Output.printStrike(user.countStrike(computerNumbers));
+            }
+        }
     }
 
-    public boolean isCountStrike(User user, List<Integer> computerNumbers) {
-        return user.countStrike(computerNumbers) < STRIKE_NUMBER && user.countBall(computerNumbers) == BALL_ZERO;
+    private void is포볼(User user, List<Long> computerNumbers) {
+        if (user.countBall(computerNumbers) == 0 && user.countStrike(computerNumbers) == 0) {
+            Output.printFourBall();
+        }
     }
 
-    public boolean isCountBall(User user, List<Integer> computerNumbers) {
-        return user.countBall(computerNumbers) <= BALL_NUMBER && user.countStrike(computerNumbers) == STRIKE_ZERO;
+    private boolean 쓰리스트라이크시작종료(User user, List<Long> computerNumbers) {
+        if (user.countStrike(computerNumbers) == 3) {
+            Output.printStrike(user.countStrike(computerNumbers));
+            Output.printCorrectAnswer();
+            return is시작또는종료();
+        } else {
+            return true;
+        }
     }
 
-    public boolean StopEndGoNumber(int number) {
-        return number == 1;
+    public boolean is시작또는종료() {
+        if (Input.inputStopEndGoNumber() == 1) {
+            Input.SC.nextLine();
+            startGame();
+        }
+        return false;
     }
 
 }

@@ -11,7 +11,7 @@ public class Input {
         return SC.nextLine();
     }
 
-    public static int inputStopEndGoNumber(){
+    public static int inputRestartNumber(){
         System.out.println("게임을 새로 시작하려면1, 종료하려면 2를입력하세요");
         return SC.nextInt();
     }

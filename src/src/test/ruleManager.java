@@ -10,7 +10,7 @@ public class ruleManager {
     public static final int ZERO_BALL_NUMBER = 0;
     public static final int THREE_BALL_NUMBER = 3;
 
-    private static int countStrike(User user, List<Long> computerNumbers) {
+    public static int countStrike(User user, List<Long> computerNumbers) {
         int strikeCount = 0;
         int userNumberIndex = 0;
         for (Long comNumber : computerNumbers) {
@@ -21,43 +21,44 @@ public class ruleManager {
         return strikeCount;
     }
 
-    private static int countBall(User user, List<Long> computerNumbers) {
+    public static int countBall(User user, List<Long> computerNumbers) {
         int ballCount = 0;
         for (Long userNumber : user.getUserNumbers()) {
             if (computerNumbers.contains(userNumber)) {
                 ballCount++;
             }
         }
-        return ballCount - countStrike(user,computerNumbers);
+        return ballCount - countStrike(user, computerNumbers);
     }
 
-    public static void isPrintStrikeBall(User user, List<Long> computerNumbers) {
-        if (countStrike(user,computerNumbers)> ZERO_STRIKE_NUMBER && countBall(user,computerNumbers) > ZERO_BALL_NUMBER) {
-            if (countStrike(user,computerNumbers) < TWO_STRIKE_NUMBER && countBall(user,computerNumbers) < THREE_BALL_NUMBER) {
-                Output.printStrikeBall(countStrike(user,computerNumbers), countBall(user,computerNumbers));
+    public static void compareStrikeBall(User user, List<Long> computerNumbers) {
+        if (countStrike(user, computerNumbers) > ZERO_STRIKE_NUMBER && countBall(user, computerNumbers) > ZERO_BALL_NUMBER) {
+            if (countStrike(user, computerNumbers) < TWO_STRIKE_NUMBER && countBall(user, computerNumbers) < THREE_BALL_NUMBER) {
+                Output.printStrikeBall(countStrike(user, computerNumbers), countBall(user, computerNumbers));
             }
         }
     }
 
-    public static void isPrintBall(User user, List<Long> computerNumbers) {
-        if (countBall(user,computerNumbers) > ZERO_BALL_NUMBER) {
-            if (countBall(user,computerNumbers) <= THREE_BALL_NUMBER && countStrike(user,computerNumbers) == ZERO_STRIKE_NUMBER) {
-                Output.printBall(countBall(user,computerNumbers));
+    public static void compareBall(User user, List<Long> computerNumbers) {
+        if (countBall(user, computerNumbers) > ZERO_BALL_NUMBER) {
+            if (countBall(user, computerNumbers) <= THREE_BALL_NUMBER && countStrike(user, computerNumbers) == ZERO_STRIKE_NUMBER) {
+                Output.printBall(countBall(user, computerNumbers));
             }
         }
     }
 
-    public static void isPrintStrike(User user, List<Long> computerNumbers) {
-        if (countStrike(user,computerNumbers) > ZERO_STRIKE_NUMBER) {
-            if (countStrike(user,computerNumbers) < THREE_STRIKE_NUMBER && countBall(user,computerNumbers) == ZERO_BALL_NUMBER) {
-                Output.printStrike(countStrike(user,computerNumbers));
+    public static void compareStrike(User user, List<Long> computerNumbers) {
+        if (countStrike(user, computerNumbers) > ZERO_STRIKE_NUMBER) {
+            if (countStrike(user, computerNumbers) < THREE_STRIKE_NUMBER && countBall(user, computerNumbers) == ZERO_BALL_NUMBER) {
+                Output.printStrike(countStrike(user, computerNumbers));
             }
         }
     }
 
-    public static void isPrintFourBall(User user, List<Long> computerNumbers) {
-        if (countBall(user,computerNumbers) == ZERO_BALL_NUMBER && countStrike(user,computerNumbers) == ZERO_STRIKE_NUMBER) {
+    public static void compareFourBall(User user, List<Long> computerNumbers) {
+        if (countBall(user, computerNumbers) == ZERO_BALL_NUMBER && countStrike(user, computerNumbers) == ZERO_STRIKE_NUMBER) {
             Output.printFourBall();
         }
     }
+
 }

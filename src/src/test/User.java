@@ -35,7 +35,7 @@ public class User {
     private boolean isCheckVacuum(String userNumber) {
         char[] userChar = userNumber.toCharArray();
         for (char ch : userChar) {
-            if (ch == ' ') {
+            if (ch == ' ') {//?
                 return true;
             }
         }
@@ -53,7 +53,7 @@ public class User {
     private void validateCheckEmpty(String userNumber) {
         if (userNumber.length() == NUMBER_SIZE_ZERO) {
             throw new IllegalArgumentException("입력을 하지 않았습니다.");
-        } else if (isCheckVacuum(userNumber)){
+        } else if (isCheckVacuum(userNumber)) {//?
             throw new IllegalArgumentException("공백을 제거하고 입력해 주세요");
         }
     }
@@ -67,7 +67,7 @@ public class User {
     private void validateCheckOverlapping(String userNumber) {
         if (userNumber.charAt(NUMBER_SIZE_ZERO) == userNumber.charAt(NUMBER_SIZE_ONE) ||
                 userNumber.charAt(NUMBER_SIZE_ZERO) == userNumber.charAt(NUMBER_SIZE_TWO) ||
-                userNumber.charAt(NUMBER_SIZE_ONE) == userNumber.charAt(NUMBER_SIZE_TWO)) {
+                userNumber.charAt(NUMBER_SIZE_ONE) == userNumber.charAt(NUMBER_SIZE_TWO)) {//??
             throw new IllegalArgumentException("중복된 값이 있습니다.");
         }
     }
@@ -75,6 +75,7 @@ public class User {
     public List<Long> getUserNumbers() {
         return userNumbers;
     }
+
 }
 
 
